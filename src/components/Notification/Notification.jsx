@@ -1,10 +1,9 @@
 import css from "./Notification.module.css";
 
-export default function Notification({ feedbackAmount }) {
+export default function Notification() {
   return (
-    (!feedbackAmount) && (
     <div>
       <p>No feedback yet</p>
-    </div>)
+    </div>
   );
 }

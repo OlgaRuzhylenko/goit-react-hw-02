@@ -39,9 +39,8 @@ export default function App() {
   };
 
   const totalFeedback = responses.good + responses.neutral + responses.bad;
-  const positiveFeedbackQuota = Math.round(
-    (responses.good / totalFeedback) * 100
-  );
+  const positiveFeedbackQuota =
+    totalFeedback > 0 ? Math.round((responses.good / totalFeedback) * 100) : 0;
 
   return (
     <>
@@ -52,12 +51,15 @@ export default function App() {
         feedbackAmount={totalFeedback}
         onInit={initFeedback}
       />
-      <Feedback
-        value={responses}
-        feedbackAmount={totalFeedback}
-        quoteOfPositive={positiveFeedbackQuota}
-      />
-      <Notification feedbackAmount={totalFeedback} />
+      {totalFeedback > 0 ? (
+        <Feedback
+          value={responses}
+          feedbackAmount={totalFeedback}
+          quoteOfPositive={positiveFeedbackQuota}
+        />
+      ) : (
+        <Notification />
+      )}
     </>
   );
 }
